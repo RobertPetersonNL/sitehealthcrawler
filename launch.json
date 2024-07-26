@@ -16,7 +16,8 @@
                 "--no-reload",
                 "--port=5001"
             ],
-            "jinja": true
+            "jinja": true,
+            "justMyCode": true
         }
     ]
 }

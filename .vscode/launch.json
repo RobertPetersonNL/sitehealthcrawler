@@ -1,6 +1,7 @@
 {
     "version": "0.2.0",
     "configurations": [
+        
         {
             "name": "Python: Flask",
             "type": "python",
@@ -16,7 +17,8 @@
                 "--no-reload",
                 "--port=5001"
             ],
-            "jinja": true
+            "jinja": true,
+            "justMyCode": true
         }
     ]
 }
