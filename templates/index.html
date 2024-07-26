@@ -1,0 +1,47 @@
+</head>
+<body>
+    <h1>Site Health Checker</h1>
+    <div class="controls">
+        <button id="refresh-all-button" onclick="refreshAll()">🔄 Refresh All</button>
+        <div class="add-website">
+            <input type="text" id="new-website" placeholder="Enter new website URL">
+            <button onclick="addWebsite()">➕ Add Website</button>
+        </div>
+    </div>
+    <h2>All Domains Status</h2>
+    <div class="container">
+        {% if results %}
+            {% for domain, result in results.items() %}
+            <div class="card">
+                <img id="screenshot-{{ domain }}" src="static/screenshots/{{ domain }}.png" alt="{{ domain }} screenshot">
+                <div class="card-content">
+                    <div>
+                        <h3>{{ domain }}</h3>
+                        <p>
+                            <span id="status-indicator-{{ domain }}" class="status-indicator {{ result['online'] }}"></span>
+                            <span id="status-text-{{ domain }}" class="status-{{ result['online'] }}">
+                                {{ 'Up' if result['online'] else 'Down' }}
+                            </span>
+                        </p>
+                        <p>Status: {{ result['online'] }}</p>
+                        <p>Last Checked: {{ result['last_checked'] }}</p>
+                    </div>
+                    <div>
+                        <span class="icon-button" onclick="toggleDetails('details-{{ domain }}')">Details</span>
+                    </div>
+                </div>
+                <div id="details-{{ domain }}" class="details">
+                    {% if result.error %}
+                        <strong>Error:</strong> <pre>{{ result.error }}</pre>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <a href="http://{{ domain }}" target="_blank" class="icon-button">🔗 Visit</a>
+                    <button id="refresh-button-{{ domain }}" class="icon-button" onclick="rescreenshot('http://{{ domain }}', '{{ domain }}')">🔄 Refresh</button>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>
